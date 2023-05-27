@@ -1,0 +1,144 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+.navbar-list {
+	list-style-type: none;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding: 0;
+	margin: 0;
+	flex-grow: 1;
+}
+
+/* Hero */
+.hero {
+	height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.svg-image {
+	background-color: transparent;
+}
+
+/* Footer */
+.footer {
+	background-color: #c2c2c2;
+	color: #fff;
+	height: 20vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.footer p {
+	margin: 0;
+}
+
+.main {
+	height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* form */
+.input {
+	position: relative;
+	max-width: 190px;
+	border: none;
+	box-shadow: 0px 1.5px 0px 0px #858585;
+	padding: 0.5rem;
+	transition: all 200ms ease-in-out;
+	opacity: 0.8;
+}
+
+.input-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.input-label {
+	font-size: 0.7rem;
+	font-weight: bold;
+	color: #858585;
+	margin-bottom: 4px;
+	margin-left: 1px;
+}
+
+.input-helper {
+	color: #858585;
+	font-size: 0.5rem;
+	margin-top: 6px;
+	margin-left: 1px;
+	visibility: hidden;
+	transform: translateY(-0.5rem);
+	transition: all 100ms linear;
+	z-index: -1;
+}
+
+.input::placeholder {
+	color: rgb(145, 145, 145);
+	font-size: 0.75rem;
+}
+
+.input::after {
+	content: attr(placeholder);
+	position: absolute;
+	color: #161616;
+	top: 0;
+	left: 0;
+}
+
+.input:focus {
+	border: none;
+	box-shadow: 0px 1.5px 0px 0px #0275d8;
+	outline: none;
+}
+
+.input:focus + .input-helper {
+	visibility: visible;
+	transform: translateY(0rem);
+}
+
+.input:focus::placeholder {
+	visibility: hidden;
+}
+
+@media screen and (max-width: 991px) {
+	#logo {
+		display: none;
+	}
+	.crearClienteImg {
+		display: none;
+	}
+}
+
+.labelPais {
+	margin-bottom: 20px;
+}
+
+.selectPais {
+	margin-bottom: 17px;
+}
