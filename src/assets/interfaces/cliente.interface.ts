@@ -2,10 +2,11 @@ export interface ICliente {
 	id?: number;
 	nombre: string;
 	apellido: string;
-	telefono: number;
-	cuit: number | string;
+	numeroTelefono: number;
 	pais: string;
 	localidad: string;
-	codpostal: string;
+	codPostal: string;
 	direccion: string;
+	empresa: string;
+	cuitCuil: string;
 }

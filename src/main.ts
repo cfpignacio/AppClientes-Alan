@@ -1,5 +1,6 @@
 import { clientesdb } from "./assets/cliente";
 import { ICliente } from "./assets/interfaces/cliente.interface";
+import { crearCliente } from "./assets/services/cliente.service";
 
 const logo = document.querySelector<HTMLAnchorElement>("#logo");
 const main = document.querySelector<HTMLDivElement>("#main");
@@ -93,7 +94,11 @@ crearClientes?.addEventListener("click", () => {
                     <span class="input-helper text-danger">Ingrese un dato valido</span>
 
                     <label class="input-label">Dirección</label>
-                    <input placeholder="Ingrese empresa..." class="input" id="direccion" type="text">
+                    <input placeholder="Ingrese dirección..." class="input" id="direccion" type="text">
+                    <span class="input-helper text-danger">Ingrese un dato valido</span>
+
+                    <label class="input-label">Empresa</label>
+                    <input placeholder="Ingrese código postal..." class="input" id="empresa" type="text">
                     <span class="input-helper text-danger">Ingrese un dato valido</span>
                 </div>
                     <div class="input-box">
@@ -134,6 +139,8 @@ crearClientes?.addEventListener("click", () => {
                         <label class="input-label">Código postal</label>
                         <input placeholder="Ingrese código postal..." class="input" id="codpostal" type="text">
                         <span class="input-helper text-danger">Ingrese un dato valido</span>
+
+
                     </div>
                 </div>
                 <div class=" d-flex justify-content-end">
@@ -173,11 +180,7 @@ crearClientes?.addEventListener("click", () => {
 		const validacion = validar(cargaDeCliente);
 		console.log(validacion);
 		if (validacion.length == 0) {
-			alert("Se creó el cliente exitosamente");
-			clientesdb.push(cargaDeCliente);
-			clientesdb.forEach((element) => {
-				console.log(element);
-			});
+			crearCliente(cargaDeCliente);
 		} else {
 			validacion.forEach((element) => {
 				alert(element);
@@ -198,21 +201,24 @@ const cargarInputs = () => {
 	const telefonoInput = document.querySelector<HTMLInputElement>("#telefono")!;
 	const cuitInput = document.querySelector<HTMLInputElement>("#cuit")!;
 	const paisInput = document.querySelector<HTMLSelectElement>("#pais")!;
+	const empresaInput = document.querySelector<HTMLInputElement>("#empresa")!;
 	const localidadInput =
 		document.querySelector<HTMLInputElement>("#localidad")!;
 	const codPostalInput =
 		document.querySelector<HTMLInputElement>("#codpostal")!;
 	const direccionInput =
 		document.querySelector<HTMLInputElement>("#direccion")!;
+
 	const cliente: ICliente = {
 		nombre: nombreInput.value,
 		apellido: apellidoInput.value,
-		telefono: Number(telefonoInput.value),
-		cuit: cuitInput.value,
+		numeroTelefono: Number(telefonoInput.value),
 		pais: paisInput.value,
 		localidad: localidadInput.value,
-		codpostal: codPostalInput.value,
+		codPostal: codPostalInput.value,
 		direccion: direccionInput.value,
+		empresa: empresaInput.value,
+		cuitCuil: cuitInput.value,
 	};
 	return cliente;
 };
@@ -222,12 +228,13 @@ function validar(cliente: ICliente) {
 	if (
 		cliente.nombre.length == 0 ||
 		cliente.apellido.length == 0 ||
-		cliente.telefono == 0 ||
+		cliente.numeroTelefono == 0 ||
 		cliente.direccion.length == 0 ||
-		cliente.cuit == 0 ||
+		cliente.cuitCuil.length == 0 ||
 		//falta validar pais si no hay ninguna opción seleccionada
 		cliente.localidad.length == 0 ||
-		cliente.codpostal.length == 0
+		cliente.codPostal.length == 0 ||
+		cliente.empresa.length == 0
 	) {
 		err.push("Existen campos vacios");
 		return err;
@@ -238,22 +245,24 @@ function validar(cliente: ICliente) {
 	if (cliente.apellido.length < 3 || cliente.apellido.length >= 18) {
 		err.push("Campo apellido debe tener entre 3 y 18 carácteres");
 	}
-	if (cliente.telefono < 8) {
+	if (cliente.numeroTelefono < 8) {
 		err.push("Campo telefono debe contener al menos 8 digitos");
 	}
 	if (cliente.direccion.length < 3 || cliente.direccion.length >= 30) {
 		err.push("Campo direccion debe contener entre 3 y 30 carácteres");
 	}
-	if (cliente.cuit.toString().length !== 11) {
+	if (cliente.cuitCuil.toString().length !== 11) {
 		err.push("Campo cuit debe contener 11 carácteres Ej: 20393235222");
 	}
 	if (cliente.localidad.length < 3 || cliente.localidad.length >= 18) {
 		err.push("Campo localidad debe contener entre 3 y 18 carácteres");
 	}
-	if (cliente.codpostal.length !== 5) {
+	if (cliente.codPostal.length !== 5) {
 		err.push("Campo código postal debe contener 5 digitos Ej: C1437");
 	}
-
+	if (cliente.empresa.length < 3 || cliente.empresa.length > 18) {
+		err.push("Campo empresa debe contener entre 3 y 18 carácteres");
+	}
 	return err;
 }
 
