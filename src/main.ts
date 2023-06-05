@@ -1,13 +1,12 @@
-import { clientesdb } from "./assets/cliente";
-import { ICliente } from "./assets/interfaces/cliente.interface";
-import { crearCliente } from "./assets/services/cliente.service";
+import { ICliente } from './cliente/interfaces/cliente.interface';
+import { crearCliente } from './cliente/services/cliente.service';
 
-const logo = document.querySelector<HTMLAnchorElement>("#logo");
-const main = document.querySelector<HTMLDivElement>("#main");
-const home = document.querySelector<HTMLAnchorElement>("#home");
-const clientes = document.querySelector<HTMLAnchorElement>("#clientes");
+const logo = document.querySelector<HTMLAnchorElement>('#logo');
+const main = document.querySelector<HTMLDivElement>('#main');
+const home = document.querySelector<HTMLAnchorElement>('#home');
+const clientes = document.querySelector<HTMLAnchorElement>('#clientes');
 const crearClientes =
-	document.querySelector<HTMLAnchorElement>("#crearClientes");
+	document.querySelector<HTMLAnchorElement>('#crearClientes');
 
 const cargarContenido = () => {
 	main!.innerHTML = `
@@ -55,19 +54,19 @@ const cargarContenido = () => {
 </div>`;
 };
 
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
 	cargarContenido();
 });
 
-logo?.addEventListener("click", () => {
+logo?.addEventListener('click', () => {
 	cargarContenido();
 });
 
-home?.addEventListener("click", () => {
+home?.addEventListener('click', () => {
 	cargarContenido();
 });
 
-crearClientes?.addEventListener("click", () => {
+crearClientes?.addEventListener('click', () => {
 	main!.innerHTML = `
     <div class="container my-5">
         <div
@@ -172,9 +171,9 @@ crearClientes?.addEventListener("click", () => {
     `;
 	//Escuchar evento del boton
 	const guardarButtonInput =
-		document.querySelector<HTMLButtonElement>("#guardarButton");
+		document.querySelector<HTMLButtonElement>('#guardarButton');
 
-	guardarButtonInput?.addEventListener("click", (e) => {
+	guardarButtonInput?.addEventListener('click', (e) => {
 		e.preventDefault();
 		const cargaDeCliente: ICliente = cargarInputs();
 		const validacion = validar(cargaDeCliente);
@@ -189,25 +188,25 @@ crearClientes?.addEventListener("click", () => {
 	});
 });
 
-clientes?.addEventListener("click", () => {
+clientes?.addEventListener('click', () => {
 	main!.innerHTML = `
     <p>proximamente...</p>
     `;
 });
 
 const cargarInputs = () => {
-	const nombreInput = document.querySelector<HTMLInputElement>("#nombre")!;
-	const apellidoInput = document.querySelector<HTMLInputElement>("#apellido")!;
-	const telefonoInput = document.querySelector<HTMLInputElement>("#telefono")!;
-	const cuitInput = document.querySelector<HTMLInputElement>("#cuit")!;
-	const paisInput = document.querySelector<HTMLSelectElement>("#pais")!;
-	const empresaInput = document.querySelector<HTMLInputElement>("#empresa")!;
+	const nombreInput = document.querySelector<HTMLInputElement>('#nombre')!;
+	const apellidoInput = document.querySelector<HTMLInputElement>('#apellido')!;
+	const telefonoInput = document.querySelector<HTMLInputElement>('#telefono')!;
+	const cuitInput = document.querySelector<HTMLInputElement>('#cuit')!;
+	const paisInput = document.querySelector<HTMLSelectElement>('#pais')!;
+	const empresaInput = document.querySelector<HTMLInputElement>('#empresa')!;
 	const localidadInput =
-		document.querySelector<HTMLInputElement>("#localidad")!;
+		document.querySelector<HTMLInputElement>('#localidad')!;
 	const codPostalInput =
-		document.querySelector<HTMLInputElement>("#codpostal")!;
+		document.querySelector<HTMLInputElement>('#codpostal')!;
 	const direccionInput =
-		document.querySelector<HTMLInputElement>("#direccion")!;
+		document.querySelector<HTMLInputElement>('#direccion')!;
 
 	const cliente: ICliente = {
 		nombre: nombreInput.value,
@@ -236,32 +235,32 @@ function validar(cliente: ICliente) {
 		cliente.codPostal.length == 0 ||
 		cliente.empresa.length == 0
 	) {
-		err.push("Existen campos vacios");
+		err.push('Existen campos vacios');
 		return err;
 	}
 	if (cliente.nombre.length < 3 || cliente.nombre.length >= 18) {
-		err.push("Campo nombre debe tener entre 3 y 18 carácteres");
+		err.push('Campo nombre debe tener entre 3 y 18 carácteres');
 	}
 	if (cliente.apellido.length < 3 || cliente.apellido.length >= 18) {
-		err.push("Campo apellido debe tener entre 3 y 18 carácteres");
+		err.push('Campo apellido debe tener entre 3 y 18 carácteres');
 	}
 	if (cliente.numeroTelefono < 8) {
-		err.push("Campo telefono debe contener al menos 8 digitos");
+		err.push('Campo telefono debe contener al menos 8 digitos');
 	}
 	if (cliente.direccion.length < 3 || cliente.direccion.length >= 30) {
-		err.push("Campo direccion debe contener entre 3 y 30 carácteres");
+		err.push('Campo direccion debe contener entre 3 y 30 carácteres');
 	}
 	if (cliente.cuitCuil.toString().length !== 11) {
-		err.push("Campo cuit debe contener 11 carácteres Ej: 20393235222");
+		err.push('Campo cuit debe contener 11 carácteres Ej: 20393235222');
 	}
 	if (cliente.localidad.length < 3 || cliente.localidad.length >= 18) {
-		err.push("Campo localidad debe contener entre 3 y 18 carácteres");
+		err.push('Campo localidad debe contener entre 3 y 18 carácteres');
 	}
 	if (cliente.codPostal.length !== 5) {
-		err.push("Campo código postal debe contener 5 digitos Ej: C1437");
+		err.push('Campo código postal debe contener 5 digitos Ej: C1437');
 	}
 	if (cliente.empresa.length < 3 || cliente.empresa.length > 18) {
-		err.push("Campo empresa debe contener entre 3 y 18 carácteres");
+		err.push('Campo empresa debe contener entre 3 y 18 carácteres');
 	}
 	return err;
 }
